@@ -1,0 +1,16 @@
+library(ncdf4) # package for netcdf manipulation
+library(raster) # package for raster manipulation
+library(rgdal) # package for geospatial analysis
+library(ggplot2) # package for plotting
+
+cop_chl <- nc_open(file.choose("Users/regina/university_projects/copernicus/COP_L3_CHL_D_1km_daily_30_38_24_36_2017-10-01.nc"), 
+                   verbose = TRUE, write = FALSE)
+
+lon <- ncvar_get(cop_chl, "lon")
+lat <- ncvar_get(cop_chl, "lat", verbose = F)
+t <- ncvar_get(cop_chl, "time")
+
+head(lon) # look at the first few entries in the longitude vector
+
+chlorophyll_a <- get.var.ncdf(CHL.nc,"chl")
+temp[temp=="32767"] <- NA
